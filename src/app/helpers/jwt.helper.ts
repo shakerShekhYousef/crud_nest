@@ -2,11 +2,11 @@ import {
   ForbiddenException,
   Injectable,
   UnauthorizedException,
-} from '@nestjs/common';
-import { ENV } from '@src/env';
-import { sign, verify } from 'jsonwebtoken';
-import { GenericObject } from '../types';
-import * as OtpUtil from 'otp-without-db';
+} from "@nestjs/common";
+import { ENV } from "@src/env";
+import { sign, verify } from "jsonwebtoken";
+import { GenericObject } from "../types";
+import * as OtpUtil from "otp-without-db";
 
 @Injectable()
 export class JWTHelper {
@@ -18,7 +18,7 @@ export class JWTHelper {
     try {
       return verify(token, ENV.jwt.secret);
     } catch (error) {
-      throw new UnauthorizedException('Unauthorized Access Detected');
+      throw new UnauthorizedException("Unauthorized Access Detected");
     }
   }
 
@@ -28,17 +28,17 @@ export class JWTHelper {
       if (decoded.isRefreshToken) {
         return decoded;
       } else {
-        throw new ForbiddenException('Unauthorized Access Detected');
+        throw new ForbiddenException("Unauthorized Access Detected");
       }
     } catch (error) {
-      throw new ForbiddenException('Unauthorized Access Detected');
+      throw new ForbiddenException("Unauthorized Access Detected");
     }
   }
 
   public extractToken(headers: GenericObject) {
     let token: string =
-      headers && headers.authorization ? headers.authorization : '';
-    token = token.replace(/Bearer\s+/gm, '');
+      headers && headers.authorization ? headers.authorization : "";
+    token = token.replace(/Bearer\s+/gm, "");
     return token;
   }
 
@@ -48,7 +48,7 @@ export class JWTHelper {
         ...data,
       },
       options: {
-        algorithm: 'HS512',
+        algorithm: "HS512",
         expiresIn: ENV.jwt.tokenExpireIn,
       },
     };
@@ -61,7 +61,7 @@ export class JWTHelper {
         ...data,
       },
       options: {
-        algorithm: 'HS512',
+        algorithm: "HS512",
         expiresIn: ENV.jwt.refreshTokenExpireIn,
       },
     };
@@ -74,7 +74,7 @@ export class JWTHelper {
         ...data,
       },
       options: {
-        algorithm: 'HS512',
+        algorithm: "HS512",
         expiresIn: ENV.jwt.refreshTokenExpireIn,
       },
     };

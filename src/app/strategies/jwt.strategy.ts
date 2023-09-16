@@ -22,9 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const user_auth = await this.userService.findOne({
       where: { id: payload.user.id },
     });
-    const user = await this.authService.validateUser(
-      user_auth.email,
-    );
+    const user = await this.authService.validateUser(user_auth.email);
     if (!user) {
       throw new UnauthorizedException();
     } else {

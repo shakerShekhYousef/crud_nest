@@ -1,4 +1,4 @@
-import slugify from 'slugify';
+import slugify from "slugify";
 
 export const gen6digitOTP = () => {
   return Math.floor(100000 + Math.random() * 900000);
@@ -6,7 +6,7 @@ export const gen6digitOTP = () => {
 
 export const slugifyString = (str: string) => {
   const slug = slugify(str, {
-    replacement: '-',
+    replacement: "-",
     remove: undefined,
     lower: true,
   });
@@ -14,12 +14,12 @@ export const slugifyString = (str: string) => {
 };
 
 export const getPaddedCode = (val: number) => {
-  return val.toString().padStart(8, '0');
+  return val.toString().padStart(8, "0");
 };
 
 export const asyncForEach = async (array: any[], callback: any) => {
   if (!Array.isArray(array)) {
-    throw Error('Expected an array');
+    throw Error("Expected an array");
   }
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array);
@@ -28,7 +28,7 @@ export const asyncForEach = async (array: any[], callback: any) => {
 
 export const groupItemBy = (array, property): any => {
   const groupedData = {},
-    props = property.split('.');
+    props = property.split(".");
   for (let i = 0; i < array.length; i++) {
     let key = props.reduce((acc, prop) => {
       return acc && acc[prop];

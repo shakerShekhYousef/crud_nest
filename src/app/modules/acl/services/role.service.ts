@@ -1,15 +1,15 @@
-import { RolePermission } from './../entities/rolePermission.entity';
-import { asyncForEach } from '@src/shared';
-import { AddPermissionsDTO } from './../dtos/role/addPermissions.dto';
-import { Injectable, BadRequestException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { BaseService } from '@src/app/base';
-import { Repository, DataSource, In } from 'typeorm';
-import { Role } from '../entities/role.entity';
-import { FilterPermissionDTO, RemovePermissionsDTO } from '../dtos';
-import { RolePermissionService } from './rolePermission.service';
-import { PermissionService } from './permission.service';
-import { Permission } from '../entities/permission.entity';
+import { RolePermission } from "./../entities/rolePermission.entity";
+import { asyncForEach } from "@src/shared";
+import { AddPermissionsDTO } from "./../dtos/role/addPermissions.dto";
+import { Injectable, BadRequestException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { BaseService } from "@src/app/base";
+import { Repository, DataSource, In } from "typeorm";
+import { Role } from "../entities/role.entity";
+import { FilterPermissionDTO, RemovePermissionsDTO } from "../dtos";
+import { RolePermissionService } from "./rolePermission.service";
+import { PermissionService } from "./permission.service";
+import { Permission } from "../entities/permission.entity";
 
 @Injectable()
 export class RoleService extends BaseService<Role> {
@@ -75,7 +75,7 @@ export class RoleService extends BaseService<Role> {
         });
 
         if (isRolePermissionExist) {
-          throw new BadRequestException('Permission already exist');
+          throw new BadRequestException("Permission already exist");
         }
         await queryRunner.manager.save(
           Object.assign(new RolePermission(), {
@@ -93,7 +93,7 @@ export class RoleService extends BaseService<Role> {
       await queryRunner.rollbackTransaction();
       await queryRunner.release();
 
-      throw new BadRequestException(error?.message || 'Something went wrong');
+      throw new BadRequestException(error?.message || "Something went wrong");
     }
 
     const permissions = await this.permissionService.find({
@@ -133,7 +133,7 @@ export class RoleService extends BaseService<Role> {
         });
 
         if (!isRolePermissionExist) {
-          throw new BadRequestException('Permission does not exist');
+          throw new BadRequestException("Permission does not exist");
         }
         await queryRunner.manager.delete(RolePermission, {
           role: isRoleExist.id,
@@ -149,7 +149,7 @@ export class RoleService extends BaseService<Role> {
       await queryRunner.rollbackTransaction();
       await queryRunner.release();
 
-      throw new BadRequestException(error?.message || 'Something went wrong');
+      throw new BadRequestException(error?.message || "Something went wrong");
     }
 
     const permissions = await this.permissionService.find({

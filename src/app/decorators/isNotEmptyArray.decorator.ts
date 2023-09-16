@@ -1,6 +1,6 @@
-import { buildMessage, ValidateBy, ValidationOptions } from 'class-validator';
+import { buildMessage, ValidateBy, ValidationOptions } from "class-validator";
 
-export const IS_NOT_EMPTY_ARRAY = 'isNotEmptyArray';
+export const IS_NOT_EMPTY_ARRAY = "isNotEmptyArray";
 
 function isValidated(value: unknown): boolean {
   if (!Array.isArray(value) || value.length === 0) {
@@ -18,7 +18,7 @@ export function IsNotEmptyArray(
       validator: {
         validate: (value, args): boolean => isValidated(value),
         defaultMessage: buildMessage(
-          (eachPrefix) => eachPrefix + '$property can not be empty array',
+          (eachPrefix) => eachPrefix + "$property can not be empty array",
           validationOptions
         ),
       },

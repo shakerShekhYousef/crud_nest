@@ -33,8 +33,13 @@ export class CreateBlogDto {
     example: true,
   })
   @IsOptional()
-  @IsBoolean()
   readonly isActive!: boolean;
+
+  @IsOptional()
+  @ApiProperty({
+    format: 'binary',
+  })
+  img_url: string;
 
   user!: User;
 

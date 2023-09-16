@@ -8,21 +8,28 @@ import {
   Post,
   Query,
   UseGuards,
+  UseInterceptors,
+  UploadedFile,
 } from "@nestjs/common";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { BlogService } from "../services/blog.service";
 import { SuccessResponse } from "@src/app/types";
 import { CreateBlogDto, FilterBlogDTO, UpdateBlogDTO } from "../dtos";
 import { Blog } from "../entities/blog.entity";
 import { AuthGuard } from "@nestjs/passport";
 import { AuthUser } from "@src/app/decorators";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { FileHelper } from "./../../../helpers/file.helper";
 
 @ApiTags("Blog")
 @ApiBearerAuth()
 @Controller("blogs")
 export class blogController {
   RELATIONS = ["user"];
-  constructor(private readonly service: BlogService) {}
+  constructor(
+    private readonly service: BlogService,
+    private readonly fileHelper: FileHelper,
+    ) {}
 
   @Get()
   async findAll(
@@ -36,13 +43,17 @@ export class blogController {
   }
 
   @Post()
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
+  @UseInterceptors(FileInterceptor("img_url", { dest: "/public/uploads" }))
+  @ApiConsumes('multipart/form-data')
   async createOne(
     @Body() body: CreateBlogDto,
-    @AuthUser() user
+    @AuthUser() user,
+    @UploadedFile() file: Express.Multer.File
   ): Promise<Blog> {
     body.userId = user.id;
     body.user = user;
+    body.img_url = this.fileHelper.store(file);
     return this.service.createOneBase(body, { relations: this.RELATIONS });
   }
 

@@ -7,24 +7,24 @@ import {
   Patch,
   Post,
   Query,
-} from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { SuccessResponse } from '@src/app/types';
+} from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { SuccessResponse } from "@src/app/types";
 import {
   CreateRoleDTO,
   FilterPermissionDTO,
   FilterRoleDTO,
   RemovePermissionsDTO,
   UpdateRoleDTO,
-} from '../dtos';
-import { Permission } from '../entities/permission.entity';
-import { Role } from '../entities/role.entity';
-import { RoleService } from '../services/role.service';
-import { AddPermissionsDTO } from './../dtos/role/addPermissions.dto';
+} from "../dtos";
+import { Permission } from "../entities/permission.entity";
+import { Role } from "../entities/role.entity";
+import { RoleService } from "../services/role.service";
+import { AddPermissionsDTO } from "./../dtos/role/addPermissions.dto";
 
-@ApiTags('Role')
+@ApiTags("Role")
 @ApiBearerAuth()
-@Controller('roles')
+@Controller("roles")
 export class RoleController {
   RELATIONS = [];
   constructor(private readonly service: RoleService) {}
@@ -36,16 +36,16 @@ export class RoleController {
     return this.service.findAllBase(query, { relations: this.RELATIONS });
   }
 
-  @Get(':id/available-permissions')
+  @Get(":id/available-permissions")
   async availablePermissions(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Query() query: FilterPermissionDTO
   ): Promise<Permission[]> {
     return this.service.availablePermissions(id, query);
   }
 
-  @Get(':id')
-  async findById(@Param('id') id: string): Promise<Role> {
+  @Get(":id")
+  async findById(@Param("id") id: string): Promise<Role> {
     return this.service.findByIdBase(id, { relations: this.RELATIONS });
   }
 
@@ -54,9 +54,9 @@ export class RoleController {
     return this.service.createOneBase(body, { relations: this.RELATIONS });
   }
 
-  @Post(':id/add-permissions')
+  @Post(":id/add-permissions")
   async addPermission(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() body: AddPermissionsDTO
   ): Promise<Permission[]> {
     return this.service.addPermissions(id, body);
@@ -67,22 +67,22 @@ export class RoleController {
   //     return this.service.recoverByIdBase(id, { relations: this.RELATIONS });
   //   }
 
-  @Patch(':id')
+  @Patch(":id")
   async updateOne(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() body: UpdateRoleDTO
   ): Promise<Role> {
     return this.service.updateOneBase(id, body, { relations: this.RELATIONS });
   }
 
-  @Delete(':id')
-  async deleteOne(@Param('id') id: string): Promise<SuccessResponse> {
+  @Delete(":id")
+  async deleteOne(@Param("id") id: string): Promise<SuccessResponse> {
     return this.service.deleteOneBase(id);
   }
 
-  @Delete(':id/remove-permissions')
+  @Delete(":id/remove-permissions")
   async removePermission(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() body: RemovePermissionsDTO
   ): Promise<Permission[]> {
     return this.service.removePermissions(id, body);

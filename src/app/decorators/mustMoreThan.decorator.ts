@@ -3,9 +3,9 @@ import {
   isNumber,
   registerDecorator,
   ValidationOptions,
-} from 'class-validator';
+} from "class-validator";
 
-export const MUST_MORE_THAN = 'mustMoreThan';
+export const MUST_MORE_THAN = "mustMoreThan";
 
 function isValidated(value: number, minValue: number): boolean {
   if (isNumber(value) && value > minValue) {
@@ -27,7 +27,7 @@ export function MustMoreThan(
       validator: {
         validate: (value, args): boolean => isValidated(value, minVal),
         defaultMessage: buildMessage(
-          (eachPrefix) => eachPrefix + '$property must be more than 0',
+          (eachPrefix) => eachPrefix + "$property must be more than 0",
           validationOptions
         ),
       },

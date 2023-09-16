@@ -1,7 +1,7 @@
-import { NotFoundException } from '@nestjs/common';
-import { BaseEntity, IBaseService } from '@src/app/base';
-import { toNumber } from '@src/shared';
-import { isUUID } from 'class-validator';
+import { NotFoundException } from "@nestjs/common";
+import { BaseEntity, IBaseService } from "@src/app/base";
+import { toNumber } from "@src/shared";
+import { isUUID } from "class-validator";
 import {
   DeepPartial,
   FindManyOptions,
@@ -10,10 +10,10 @@ import {
   ILike,
   Repository,
   SaveOptions,
-} from 'typeorm';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
-import { IFindAllBaseOptions, IFindByIdBaseOptions } from '../interfaces';
-import { SuccessResponse } from '../types';
+} from "typeorm";
+import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
+import { IFindAllBaseOptions, IFindByIdBaseOptions } from "../interfaces";
+import { SuccessResponse } from "../types";
 
 export abstract class BaseService<T extends BaseEntity>
   implements IBaseService<T>
@@ -61,7 +61,7 @@ export abstract class BaseService<T extends BaseEntity>
 
     if (
       searchTerm &&
-      this.repo.target.valueOf().hasOwnProperty('SEARCH_TERMS')
+      this.repo.target.valueOf().hasOwnProperty("SEARCH_TERMS")
     ) {
       let SEARCH_TERMS = (this.repo.target.valueOf() as any).SEARCH_TERMS || [];
 

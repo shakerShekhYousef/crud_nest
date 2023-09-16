@@ -1,13 +1,12 @@
-import { INestApplication } from '@nestjs/common';
-import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
-import { ENV } from './env';
-
+import { INestApplication } from "@nestjs/common";
+import { DocumentBuilder, OpenAPIObject, SwaggerModule } from "@nestjs/swagger";
+import { ENV } from "./env";
 
 const defaultSwaggerOpts = {
   swaggerOptions: {
     docExpansion: false,
-    tagsSorter: 'alpha',
-    operationsSorter: 'alpha',
+    tagsSorter: "alpha",
+    operationsSorter: "alpha",
   },
 };
 
@@ -20,5 +19,5 @@ export function setupSwagger(app: INestApplication): void {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('/docs', app, document, defaultSwaggerOpts);
+  SwaggerModule.setup("/docs", app, document, defaultSwaggerOpts);
 }

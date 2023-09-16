@@ -7,20 +7,20 @@ import {
   Patch,
   Post,
   Query,
-} from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { SuccessResponse } from '@src/app/types';
-import { FilterRoleDTO } from '../../acl/dtos';
-import { Role } from '../../acl/entities/role.entity';
-import { CreateUserDTO, FilterUserDTO, UpdateUserDTO } from '../dtos';
-import { User } from '../entities/user.entity';
-import { UserService } from '../services/user.service';
+} from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { SuccessResponse } from "@src/app/types";
+import { FilterRoleDTO } from "../../acl/dtos";
+import { Role } from "../../acl/entities/role.entity";
+import { CreateUserDTO, FilterUserDTO, UpdateUserDTO } from "../dtos";
+import { User } from "../entities/user.entity";
+import { UserService } from "../services/user.service";
 
-@ApiTags('User')
+@ApiTags("User")
 @ApiBearerAuth()
-@Controller('users')
+@Controller("users")
 export class UserController {
-  RELATIONS = ['userRoles', 'userRoles.role'];
+  RELATIONS = ["userRoles", "userRoles.role"];
   constructor(private readonly service: UserService) {}
 
   @Get()
@@ -30,16 +30,16 @@ export class UserController {
     return this.service.findAllBase(query, { relations: this.RELATIONS });
   }
 
-  @Get(':id/available-roles')
+  @Get(":id/available-roles")
   async availableRoles(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Query() query: FilterRoleDTO
   ): Promise<Role[]> {
     return this.service.availableRoles(id, query);
   }
 
-  @Get(':id')
-  async findById(@Param('id') id: string): Promise<User> {
+  @Get(":id")
+  async findById(@Param("id") id: string): Promise<User> {
     return this.service.findByIdBase(id, { relations: this.RELATIONS });
   }
 
@@ -53,16 +53,16 @@ export class UserController {
   //     return this.service.recoverByIdBase(id);
   //   }
 
-  @Patch(':id')
+  @Patch(":id")
   async updateOne(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() body: UpdateUserDTO
   ): Promise<User> {
     return this.service.updateUser(id, body, this.RELATIONS);
   }
 
-  @Delete(':id')
-  async deleteOne(@Param('id') id: string): Promise<SuccessResponse> {
+  @Delete(":id")
+  async deleteOne(@Param("id") id: string): Promise<SuccessResponse> {
     return this.service.deleteOneBase(id);
   }
 

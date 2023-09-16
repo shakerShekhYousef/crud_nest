@@ -1,8 +1,8 @@
-import { buildMessage, ValidateBy, ValidationOptions } from 'class-validator';
-import type ValidatorJS from 'validator';
-import isUuidValidator from 'validator/lib/isUUID';
+import { buildMessage, ValidateBy, ValidationOptions } from "class-validator";
+import type ValidatorJS from "validator";
+import isUuidValidator from "validator/lib/isUUID";
 
-export const IS_UUID_ARRAY = 'isUuidArray';
+export const IS_UUID_ARRAY = "isUuidArray";
 
 function isValidated(
   value: unknown,
@@ -32,7 +32,7 @@ export function IsUUIDArray(
         validate: (value, args): boolean =>
           isValidated(value, args?.constraints[0]),
         defaultMessage: buildMessage(
-          (eachPrefix) => eachPrefix + '$property must be an array of UUID',
+          (eachPrefix) => eachPrefix + "$property must be an array of UUID",
           validationOptions
         ),
       },

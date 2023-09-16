@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { ENV } from '@src/env';
-import { compare, hash } from 'bcryptjs';
+import { Injectable } from "@nestjs/common";
+import { ENV } from "@src/env";
+import { compare, hash } from "bcryptjs";
 
 @Injectable()
 export class BcryptHelper {

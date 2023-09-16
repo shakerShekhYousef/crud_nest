@@ -21,6 +21,10 @@ export class Blog extends BaseEntity {
   @RelationId((e: Blog) => e.user)
   userId?: string;
 
+  @Column()
+  img_url?: string;
+ 
+
   constructor() {
     super();
   }

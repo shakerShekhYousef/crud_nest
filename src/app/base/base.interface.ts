@@ -1,7 +1,7 @@
-import { IFindAllBaseOptions } from './../interfaces/queryOptions.interfaces';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
-import { IFindByIdBaseOptions } from '../interfaces';
-import { GenericObject, SuccessResponse } from '../types';
+import { IFindAllBaseOptions } from "./../interfaces/queryOptions.interfaces";
+import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
+import { IFindByIdBaseOptions } from "../interfaces";
+import { GenericObject, SuccessResponse } from "../types";
 
 export interface IBaseService<T> {
   findByIdBase(id: string, options?: IFindByIdBaseOptions): Promise<T>;

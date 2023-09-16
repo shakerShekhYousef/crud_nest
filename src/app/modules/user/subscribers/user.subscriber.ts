@@ -1,11 +1,11 @@
-import { BcryptHelper } from '@src/app/helpers';
+import { BcryptHelper } from "@src/app/helpers";
 import {
   DataSource,
   EntitySubscriberInterface,
   EventSubscriber,
   InsertEvent,
-} from 'typeorm';
-import { User } from '../entities/user.entity';
+} from "typeorm";
+import { User } from "../entities/user.entity";
 
 @EventSubscriber()
 export class UserSubscriber implements EntitySubscriberInterface<User> {

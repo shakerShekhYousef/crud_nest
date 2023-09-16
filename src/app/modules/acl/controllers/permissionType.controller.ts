@@ -7,20 +7,20 @@ import {
   Patch,
   Post,
   Query,
-} from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { SuccessResponse } from '@src/app/types';
+} from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { SuccessResponse } from "@src/app/types";
 import {
   CreatePermissionTypeDTO,
   FilterPermissionTypeDTO,
   UpdatePermissionTypeDTO,
-} from '../dtos';
-import { PermissionType } from '../entities/permissionType.entity';
-import { PermissionTypeService } from '../services/permissionType.service';
+} from "../dtos";
+import { PermissionType } from "../entities/permissionType.entity";
+import { PermissionTypeService } from "../services/permissionType.service";
 
-@ApiTags('PermissionType')
+@ApiTags("PermissionType")
 @ApiBearerAuth()
-@Controller('permission-types')
+@Controller("permission-types")
 export class PermissionTypeController {
   RELATIONS = [];
   constructor(private readonly service: PermissionTypeService) {}
@@ -32,8 +32,8 @@ export class PermissionTypeController {
     return this.service.findAllBase(query, { relations: this.RELATIONS });
   }
 
-  @Get(':id')
-  async findById(@Param('id') id: string): Promise<PermissionType> {
+  @Get(":id")
+  async findById(@Param("id") id: string): Promise<PermissionType> {
     return this.service.findByIdBase(id, { relations: this.RELATIONS });
   }
 
@@ -49,16 +49,16 @@ export class PermissionTypeController {
   //     return this.service.recoverByIdBase(id, { relations: this.RELATIONS });
   //   }
 
-  @Patch(':id')
+  @Patch(":id")
   async updateOne(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() body: UpdatePermissionTypeDTO
   ): Promise<PermissionType> {
     return this.service.updateOneBase(id, body, { relations: this.RELATIONS });
   }
 
-  @Delete(':id')
-  async deleteOne(@Param('id') id: string): Promise<SuccessResponse> {
+  @Delete(":id")
+  async deleteOne(@Param("id") id: string): Promise<SuccessResponse> {
     return this.service.deleteOneBase(id);
   }
 

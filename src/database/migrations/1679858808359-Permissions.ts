@@ -3,8 +3,8 @@ import {
   defaultDateTimeColumns,
   ENUM_COLUMN_TYPES,
   ENUM_TABLE_NAMES,
-} from '@src/shared';
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+} from "@src/shared";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class Permissions1679858808359 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -13,20 +13,20 @@ export class Permissions1679858808359 implements MigrationInterface {
         name: ENUM_TABLE_NAMES.PERMISSIONS,
         columns: [
           {
-            name: 'id',
+            name: "id",
             type: ENUM_COLUMN_TYPES.UUID,
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: 'uuid',
+            generationStrategy: "uuid",
           },
           {
-            name: 'title',
+            name: "title",
             type: ENUM_COLUMN_TYPES.VARCHAR,
-            length: '256',
+            length: "256",
             isNullable: true,
           },
           {
-            name: 'permissionTypeId',
+            name: "permissionTypeId",
             type: ENUM_COLUMN_TYPES.UUID,
             isNullable: true,
           },
@@ -35,12 +35,12 @@ export class Permissions1679858808359 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: 'fk_permissions_permission_type_id',
-            columnNames: ['permissionTypeId'],
+            name: "fk_permissions_permission_type_id",
+            columnNames: ["permissionTypeId"],
             referencedTableName: ENUM_TABLE_NAMES.PERMISSION_TYPES,
-            referencedColumnNames: ['id'],
-            onDelete: 'NO ACTION',
-            onUpdate: 'NO ACTION',
+            referencedColumnNames: ["id"],
+            onDelete: "NO ACTION",
+            onUpdate: "NO ACTION",
           },
         ],
       }),
@@ -54,7 +54,7 @@ export class Permissions1679858808359 implements MigrationInterface {
     await queryRunner.dropForeignKey(
       ENUM_TABLE_NAMES.PERMISSIONS,
       table.foreignKeys.find(
-        (fk) => fk.columnNames.indexOf('permissionTypeId') !== -1
+        (fk) => fk.columnNames.indexOf("permissionTypeId") !== -1
       )
     );
 

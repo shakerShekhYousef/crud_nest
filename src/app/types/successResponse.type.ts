@@ -22,7 +22,7 @@ export class SuccessResponse {
   ) {
     this.success = true;
     this.statusCode = 200;
-    this.message = message || 'Success';
+    this.message = message || "Success";
     if (meta) {
       this.meta = meta;
     }

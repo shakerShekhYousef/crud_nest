@@ -1,14 +1,14 @@
-import { ENUM_COLUMN_TYPES } from '@src/shared';
+import { ENUM_COLUMN_TYPES } from "@src/shared";
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
 export abstract class BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id?: string;
 
   @Column({ type: ENUM_COLUMN_TYPES.BOOLEAN, default: true, nullable: true })

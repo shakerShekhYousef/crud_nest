@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IFindAllBaseOptions } from '@src/app/interfaces';
-import { toNumber } from '@src/shared';
-import { isUUID } from 'class-validator';
-import { FindManyOptions, FindOptionsWhere, ILike, Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { IFindAllBaseOptions } from "@src/app/interfaces";
+import { toNumber } from "@src/shared";
+import { isUUID } from "class-validator";
+import { FindManyOptions, FindOptionsWhere, ILike, Repository } from "typeorm";
 
 @Injectable()
 export class QueryHelper {
@@ -23,7 +23,7 @@ export class QueryHelper {
     page = toNumber(page) || 1;
     const skip = (page - 1) * take;
 
-    if (searchTerm && _repo.target.valueOf().hasOwnProperty('SEARCH_TERMS')) {
+    if (searchTerm && _repo.target.valueOf().hasOwnProperty("SEARCH_TERMS")) {
       let SEARCH_TERMS = (_repo.target.valueOf() as any).SEARCH_TERMS || [];
 
       if (Object.keys(queryOptions).length) {

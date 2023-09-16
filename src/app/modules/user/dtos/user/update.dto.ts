@@ -1,6 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsUUIDArray } from '@src/app/decorators';
-import { Type } from 'class-transformer';
+import { ApiProperty } from "@nestjs/swagger";
+import { IsUUIDArray } from "@src/app/decorators";
+import { Type } from "class-transformer";
 import {
   IsBoolean,
   IsEmail,
@@ -11,13 +11,13 @@ import {
   MaxLength,
   MinLength,
   ValidateNested,
-} from 'class-validator';
+} from "class-validator";
 
 export class UpdateRolesDTO {
   @ApiProperty({
     type: String,
     required: true,
-    example: 'c10ee33d-20a7-4689-8f80-929963400f7d',
+    example: "c10ee33d-20a7-4689-8f80-929963400f7d",
   })
   @IsNotEmpty()
   @IsUUID()
@@ -37,7 +37,7 @@ export class UpdateUserDTO {
   @ApiProperty({
     type: String,
     required: false,
-    example: 'Zahid',
+    example: "User",
   })
   @IsOptional()
   @IsString()
@@ -46,25 +46,16 @@ export class UpdateUserDTO {
   @ApiProperty({
     type: String,
     required: false,
-    example: 'Hasan',
+    example: "test",
   })
   @IsOptional()
   @IsString()
   readonly lastName!: string;
 
-  //   @ApiProperty({
-  //     type: String,
-  //     required: false,
-  //     example: 'zahid@gmail.com',
-  //   })
-  //   @IsOptional()
-  //   @IsEmail()
-  //   readonly email!: string;
-
   @ApiProperty({
     type: String,
     required: false,
-    example: '123456',
+    example: "123456",
   })
   @IsOptional()
   @IsString()
@@ -77,10 +68,10 @@ export class UpdateUserDTO {
     required: false,
     example: [
       {
-        role: '1e276fa4-bab1-4bda-bee2-8bc509960467',
+        role: "1e276fa4-bab1-4bda-bee2-8bc509960467",
       },
       {
-        role: 'c10ee33d-20a7-4689-8f80-929963400f7d',
+        role: "c10ee33d-20a7-4689-8f80-929963400f7d",
         isDeleted: true,
       },
     ],

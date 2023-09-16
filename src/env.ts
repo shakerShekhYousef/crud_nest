@@ -1,19 +1,19 @@
-import { toBool, toNumber } from '@src/shared';
-import { config } from 'dotenv';
-import * as path from 'path';
+import { toBool, toNumber } from "@src/shared";
+import { config } from "dotenv";
+import * as path from "path";
 
 config({
   path: path.join(
     process.cwd(),
-    'environments',
-    `${process.env.NODE_ENV || 'development'}.env`
+    "environments",
+    `${process.env.NODE_ENV || "development"}.env`
   ),
 });
 
-export const ENV_DEVELOPMENT = 'development';
-export const ENV_PRODUCTION = 'production';
-export const ENV_STAGING = 'staging';
-export const ENV_QA = 'qa';
+export const ENV_DEVELOPMENT = "development";
+export const ENV_PRODUCTION = "production";
+export const ENV_STAGING = "staging";
+export const ENV_QA = "qa";
 
 export const ENV = {
   port: process.env.PORT,
@@ -31,7 +31,7 @@ export const ENV = {
   },
 
   security: {
-    CORS_ALLOWED_ORIGINS: process.env.CORS_ALLOWED_ORIGINS.split(','),
+    CORS_ALLOWED_ORIGINS: process.env.CORS_ALLOWED_ORIGINS.split(","),
     RATE_LIMIT_TTL: toNumber(process.env.RATE_LIMIT_TTL),
     RATE_LIMIT_MAX: toNumber(process.env.RATE_LIMIT_MAX),
   },

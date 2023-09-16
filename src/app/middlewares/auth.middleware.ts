@@ -2,8 +2,8 @@ import {
   Injectable,
   NestMiddleware,
   UnauthorizedException,
-} from '@nestjs/common';
-import { JWTHelper } from '../helpers';
+} from "@nestjs/common";
+import { JWTHelper } from "../helpers";
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
@@ -13,7 +13,7 @@ export class AuthMiddleware implements NestMiddleware {
     const verifiedUser: any = await this.jwtHelper.verify(token);
 
     if (!verifiedUser) {
-      throw new UnauthorizedException('Unauthorized Access Detected');
+      throw new UnauthorizedException("Unauthorized Access Detected");
     }
 
     req.verifiedUser = verifiedUser.user;

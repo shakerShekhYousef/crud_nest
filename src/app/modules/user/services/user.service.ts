@@ -2,26 +2,26 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { BaseService } from '@src/app/base/base.service';
-import { BcryptHelper } from '@src/app/helpers';
-import { asyncForEach, ENUM_ACL_DEFAULT_ROLES } from '@src/shared';
-import { isNotEmptyObject } from 'class-validator';
-import { DataSource, Repository } from 'typeorm';
-import { FilterRoleDTO } from '../../acl/dtos';
-import { Role } from '../../acl/entities/role.entity';
-import { RoleService } from '../../acl/services/role.service';
-import { LoginDTO, RegisterDTO } from '../../auth/dtos';
+} from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { BaseService } from "@src/app/base/base.service";
+import { BcryptHelper } from "@src/app/helpers";
+import { asyncForEach, ENUM_ACL_DEFAULT_ROLES } from "@src/shared";
+import { isNotEmptyObject } from "class-validator";
+import { DataSource, Repository } from "typeorm";
+import { FilterRoleDTO } from "../../acl/dtos";
+import { Role } from "../../acl/entities/role.entity";
+import { RoleService } from "../../acl/services/role.service";
+import { LoginDTO, RegisterDTO } from "../../auth/dtos";
 import {
   CreateRolesDTO,
   CreateUserDTO,
   UpdateRolesDTO,
   UpdateUserDTO,
-} from '../dtos';
-import { User } from '../entities/user.entity';
-import { UserRole } from './../entities/userRole.entity';
-import { UserRoleService } from './userRole.service';
+} from "../dtos";
+import { User } from "../entities/user.entity";
+import { UserRole } from "./../entities/userRole.entity";
+import { UserRoleService } from "./userRole.service";
 
 @Injectable()
 export class UserService extends BaseService<User> {
@@ -76,7 +76,7 @@ export class UserService extends BaseService<User> {
       );
 
       if (!createdUser) {
-        throw new BadRequestException('User not created');
+        throw new BadRequestException("User not created");
       }
 
       if (roles && roles.length) {
@@ -97,11 +97,11 @@ export class UserService extends BaseService<User> {
       await queryRunner.rollbackTransaction();
       await queryRunner.release();
 
-      throw new BadRequestException(error.message || 'User not created');
+      throw new BadRequestException(error.message || "User not created");
     }
 
     if (!createdUser) {
-      throw new BadRequestException('User not created');
+      throw new BadRequestException("User not created");
     }
 
     const updatedUser = await this.findOne({
@@ -175,7 +175,7 @@ export class UserService extends BaseService<User> {
       await queryRunner.rollbackTransaction();
       await queryRunner.release();
 
-      throw new BadRequestException(error.message || 'User not updated');
+      throw new BadRequestException(error.message || "User not updated");
     }
 
     const updatedUser = await this.findOne({
@@ -216,7 +216,7 @@ export class UserService extends BaseService<User> {
     const isExist = await this.findOneBase({ email: payload.email });
 
     if (isExist) {
-      throw new ConflictException('Email already exists');
+      throw new ConflictException("Email already exists");
     } else {
       const createdUser = await this.createOneBase({
         firstName: payload.firstName,
@@ -238,17 +238,17 @@ export class UserService extends BaseService<User> {
     const isExist = await this.findOne({
       where: { email: payload.email },
       select: [
-        'id',
-        'firstName',
-        'lastName',
-        'email',
-        'password',
-        'phoneNumber',
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "password",
+        "phoneNumber",
       ],
     });
 
     if (!isExist) {
-      throw new BadRequestException('User does not exists');
+      throw new BadRequestException("User does not exists");
     }
 
     const isPasswordMatch = await this.bcrypt.compareHash(
@@ -257,7 +257,7 @@ export class UserService extends BaseService<User> {
     );
 
     if (!isPasswordMatch) {
-      throw new BadRequestException('Password does not match');
+      throw new BadRequestException("Password does not match");
     }
 
     return isExist;
