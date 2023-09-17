@@ -1,4 +1,4 @@
-import { NotFoundException } from "@nestjs/common";
+import { NotFoundException, UploadedFile } from "@nestjs/common";
 import { BaseEntity, IBaseService } from "@src/app/base";
 import { toNumber } from "@src/shared";
 import { isUUID } from "class-validator";
